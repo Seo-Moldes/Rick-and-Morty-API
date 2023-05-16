@@ -1,7 +1,10 @@
-"use strict";
+import { populateSeasons } from "./episode/index.js";
 const urlApi = "https://rickandmortyapi.com/api";
-fetch(urlApi)
-    .then((response) => response.json())
-    .then((data) => {
-    console.log(data);
-});
+const urlCharacter = "https://rickandmortyapi.com/api/character";
+const urlLocations = "https://rickandmortyapi.com/api/location";
+const urlEpisodes = "https://rickandmortyapi.com/api/episode";
+const episodesList = document.getElementById("episodesList");
+const loadEpisodesButton = document.getElementById("loadEpisodesButton");
+window.onload = function () {
+    populateSeasons();
+};

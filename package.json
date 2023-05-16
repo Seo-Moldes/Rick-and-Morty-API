@@ -1,0 +1,23 @@
+{
+  "name": "rick-and-morty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seo-Moldes/Rick-and-Morty-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seo-Moldes/Rick-and-Morty-API/issues"
+  },
+  "homepage": "https://github.com/Seo-Moldes/Rick-and-Morty-API#readme",
+  "dependencies": {
+    "rickmortyapi": "^2.3.0"
+  }
+}

@@ -123,10 +123,7 @@ export const populateSeasons = async () => {
                   characterDiv.appendChild(paragraftSpecies);
   
                   divCharacters.appendChild(characterDiv);
-                  characterDiv.addEventListener("click", () =>
-                    showCharacter(characterData.id)
-                    
-                  );
+                 
               
                 });
               })
@@ -165,62 +162,4 @@ export const populateSeasons = async () => {
     return allEpisodes;
   };
 
-  async function showCharacter(characterData: {
-    image: string;
-    name: string;
-    status: string;
-    species: string;
-    episode: string[];
-  }) {
-    // Crear un contenedor para mostrar los detalles del personaje
-    const cDetailsContainer = document.createElement("div");
-    cDetailsContainer.setAttribute("class", "character-details");
-  
-    // Mostrar la imagen del personaje
-    const characterImage = document.createElement("img");
-    characterImage.setAttribute("src", characterData.image);
-    cDetailsContainer.appendChild(characterImage);
-  
-    // Mostrar el nombre del personaje
-    const paragraftName = document.createElement("p");
-    paragraftName.textContent = `Name: ${characterData.name}`;
-    cDetailsContainer.appendChild(paragraftName);
-  
-    // Mostrar el estado del personaje
-    const paragraftStatus = document.createElement("p");
-    paragraftStatus.textContent = `Status: ${characterData.status}`;
-    cDetailsContainer.appendChild(paragraftStatus);
-  
-    // Mostrar la especie del personaje
-    const paragraftSpecies = document.createElement("p");
-    paragraftSpecies.textContent = `Species: ${characterData.species}`;
-    cDetailsContainer.appendChild(paragraftSpecies);
-  
-    // Obtener los episodios del personaje
-    try {
-      const episodePromise = characterData.episode.map((urlEpisodes: string) =>
-        fetch(urlEpisodes).then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch episode data");
-          }
-          return response.json();
-        })
-      );
-  
-      const episodes = await Promise.all(episodePromise);
-  
-      // Mostrar los episodios en los que aparece el personaje
-      const episodeLi = document.createElement("ul");
-      episodes.forEach((episode) => {
-        const episodeIt = document.createElement("li");
-        episodeIt.textContent = episode.name;
-        episodeLi.appendChild(episodeIt);
-      });
-      cDetailsContainer.appendChild(episodeLi);
-  
-      // Mostrar los detalles en el DOM
-    } catch (error) {
-      console.error("Error fetching episode data:", error);
-    }
-  }
   

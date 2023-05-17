@@ -102,7 +102,6 @@ export const populateSeasons = () => __awaiter(void 0, void 0, void 0, function*
                             paragraftSpecies.textContent = `Species: ${characterData.species}`;
                             characterDiv.appendChild(paragraftSpecies);
                             divCharacters.appendChild(characterDiv);
-                            characterDiv.addEventListener("click", () => showCharacter(characterData.id));
                         });
                     })
                         .catch((error) => {
@@ -137,40 +136,3 @@ const fetchEpisodes = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     return allEpisodes;
 });
-function showCharacter(characterData) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const cDetailsContainer = document.createElement("div");
-        cDetailsContainer.setAttribute("class", "character-details");
-        const characterImage = document.createElement("img");
-        characterImage.setAttribute("src", characterData.image);
-        cDetailsContainer.appendChild(characterImage);
-        const paragraftName = document.createElement("p");
-        paragraftName.textContent = `Name: ${characterData.name}`;
-        cDetailsContainer.appendChild(paragraftName);
-        const paragraftStatus = document.createElement("p");
-        paragraftStatus.textContent = `Status: ${characterData.status}`;
-        cDetailsContainer.appendChild(paragraftStatus);
-        const paragraftSpecies = document.createElement("p");
-        paragraftSpecies.textContent = `Species: ${characterData.species}`;
-        cDetailsContainer.appendChild(paragraftSpecies);
-        try {
-            const episodePromise = characterData.episode.map((urlEpisodes) => fetch(urlEpisodes).then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch episode data");
-                }
-                return response.json();
-            }));
-            const episodes = yield Promise.all(episodePromise);
-            const episodeLi = document.createElement("ul");
-            episodes.forEach((episode) => {
-                const episodeIt = document.createElement("li");
-                episodeIt.textContent = episode.name;
-                episodeLi.appendChild(episodeIt);
-            });
-            cDetailsContainer.appendChild(episodeLi);
-        }
-        catch (error) {
-            console.error("Error fetching episode data:", error);
-        }
-    });
-}

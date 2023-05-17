@@ -1,5 +1,4 @@
 /*FONTS*/
-
 @font-face {
   font-family: fuentePersonalizada;
   src: url(../fonts/ShadowsIntoLight-Regular.ttf);
@@ -7,7 +6,7 @@
 
 
 /*BODY*/
-.containerMain {
+.container-main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -47,13 +46,15 @@ hr {
 /*NAVBAR*/
 
 .nav-link {
-  color: white;
+  color: white !important;
 }
 
-.nav-pills .nav-link:hover {
-  background-color: green; 
-  color: white;
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link:active {
+  background-color: green !important;
+  color: white !important;
 }
+
 
 /*NAME EPISODE - DATEAIR*/
 
@@ -66,4 +67,23 @@ hr {
 .change-color-cards {
   background-color: rgba(10, 172, 10, 0.8);
   color: white;
+}
+
+/*PAGINATION*/
+
+.page-link {
+  color: green;
+   margin-top: 30px; 
+}
+
+.page-link:hover {
+  background-color: rgba(10, 172, 10, 0.8);
+  color: white;
+}
+/* .activePageButton {
+  background-color: green;
+} */
+
+.divLocation {
+  background-color: green;
 }

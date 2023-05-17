@@ -101,7 +101,6 @@ const calTotalPages = (totalCharacters) => {
     return Math.ceil(totalCharacters / charactersPerPage);
 };
 function showCharacters(characters, totalPages, page) {
-    console.log("prueba");
     const containerCards = document.getElementById("containerCards");
     const currentPage = page;
     if (!containerCards)
@@ -140,3 +139,4 @@ function showCharacters(characters, totalPages, page) {
     });
     pagination(totalPages, page, characters);
 }
+;

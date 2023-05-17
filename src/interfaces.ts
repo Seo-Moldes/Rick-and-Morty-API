@@ -85,6 +85,7 @@ export  interface Episode {
     Dead = "Dead",
     Unknown = "unknown",
   }
+  
   export interface ResultCharacter {
   created: Date;
   episode: string[];

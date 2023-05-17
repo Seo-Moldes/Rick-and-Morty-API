@@ -78,55 +78,46 @@ function showLocation(location: Location) {
   pLocation.classList.add("p-location");
   pLocation.textContent = `Location: ${location.type}, ${location.dimension}`;
   cardLocation.appendChild(pLocation);
-
   const divResident = document.createElement("div");
   divResident.setAttribute("class", "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5");
   cardLocation.appendChild(divResident);
   const residentPromise = location.residents.map((urlCharacter) => {
 
     return fetch(urlCharacter)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error("error geting residents data:", error)
-    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("error geting residents data:", error)
+      })
 
   })
 
   Promise.all(residentPromise)
-  .then((arrayCharacter) => {
-    arrayCharacter.forEach((character) => {
-      const divCharacter = document.createElement("div");
-      divCharacter.setAttribute("class", "col");
-      divResident.appendChild(divCharacter);
-      const residentImage = document.createElement("img");
-      residentImage.setAttribute("src", character.image);
-      divCharacter.appendChild(residentImage);
+    .then((arrayCharacter) => {
+      arrayCharacter.forEach((character) => {
+        const divCharacter = document.createElement("div");
+        divCharacter.setAttribute("class", "col");
+        divResident.appendChild(divCharacter);
+        const residentImage = document.createElement("img");
+        residentImage.setAttribute("src", character.image);
+        divCharacter.appendChild(residentImage);
+        const residentName = document.createElement("h3");
+        residentName.setAttribute("class", "text-white");
+        residentName.textContent = `Name: ${character.name}`;
+        const residentStatus = document.createElement("p");
+        residentStatus.setAttribute("class", "text-white");
+        residentStatus.textContent = `Status: ${character.status}`;
+        divCharacter.appendChild(residentStatus);
+        const residentSpecies = document.createElement("p");
+        residentSpecies.setAttribute("class", "text-white");
+        residentSpecies.textContent = `Species: ${character.species}`;
+        divCharacter.appendChild(residentSpecies);
 
-      const residentName = document.createElement("h3");
-      residentName.setAttribute("class", "text-white");
-      residentName.textContent = `Name: ${character.name}`;
-      const residentStatus = document.createElement("p");
-      residentStatus.setAttribute("class", "text-white");
-      residentStatus.textContent = `Status: ${character.status}`;
-      divCharacter.appendChild(residentStatus);
-      const residentSpecies = document.createElement("p");
-      residentSpecies.setAttribute("class", "text-white");
-      residentSpecies.textContent = `Species: ${character.species}`;
-      divCharacter.appendChild(residentSpecies);
+      });
+    })
 
-
-
-
-
-
-
+    .catch((error) => {
+      console.error("error obteniendo datos de los residentes:", error);
     });
-  })
-  .catch((error) => {
-    console.error("error obteniendo datos de los residentes:", error);
-  });
-
-  
 
 }
 

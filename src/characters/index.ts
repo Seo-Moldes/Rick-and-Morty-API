@@ -1,7 +1,6 @@
-
 const urlCharacter = "https://rickandmortyapi.com/api/character";
 const urlEpisodes = "https://rickandmortyapi.com/api/episode";
-import { Character, ResultCharacter, CharacterLocation,  } from "../interfaces.js";
+import { Character, ResultCharacter, CharacterLocation, } from "../interfaces.js";
 
 export const getCharacters = async () => {
   try {
@@ -9,11 +8,11 @@ export const getCharacters = async () => {
     const characters = await fetchCharacter();
     const totalPages = calTotalPages(characters.length);
 
-   characterButton?.addEventListener("click", () =>
+    characterButton?.addEventListener("click", () =>
       showCharacters(characters, totalPages, 1),
-      
+
     );
-    
+
   } catch (error) {
     console.error("Error getting characters", error);
   }
@@ -36,16 +35,17 @@ const fetchCharacter = async (): Promise<Character[]> => {
         species: characterData.species,
         image: characterData.image,
         location: characterData.location.name,
-        
+
       };
-      
+
     });
     allCharacters = allCharacters.concat(characters as ResultCharacter[]);
     nextPageUrl = data.info.next;
   }
   return allCharacters as Character[];
-  
+
 };
+
 const pagination = (totalPages: number, page: number, characters: Character[]) => {
   const containerCards = document.getElementById("containerCards");
   const containerP = document.createElement("div");
@@ -58,7 +58,6 @@ const pagination = (totalPages: number, page: number, characters: Character[]) =
   const paginationLi = document.createElement("ul");
   paginationLi.classList.add("pagination");
   containerP.appendChild(paginationLi);
-
   const prevPage = document.createElement("li");
   prevPage.classList.add("page-item");
   const linkPrevPage = document.createElement("button");
@@ -86,7 +85,6 @@ const pagination = (totalPages: number, page: number, characters: Character[]) =
       showCharacters(characters, totalPages, i); // Pasar el número de página como argumento
     });
 
-   
   }
 
   const pageNext = document.createElement("li");
@@ -111,8 +109,8 @@ const pagination = (totalPages: number, page: number, characters: Character[]) =
       showCharacters(characters, totalPages, page - 1); // Mostrar la página anterior
     }
   });
-};
 
+};
 
 const calTotalPages = (totalCharacters: number) => {
   const charactersPerPage = 20;
@@ -120,7 +118,6 @@ const calTotalPages = (totalCharacters: number) => {
 };
 
 function showCharacters(characters: Character[], totalPages: number, page: number) {
-  console.log("prueba");
   const containerCards = document.getElementById("containerCards");
   const currentPage = page;
   if (!containerCards) return;
@@ -129,10 +126,9 @@ function showCharacters(characters: Character[], totalPages: number, page: numbe
   const charactersPerPage = 20;
   const startIndex = (page - 1) * charactersPerPage;
   const endIndex = startIndex + charactersPerPage;
-
   const displayCharacters = characters.slice(startIndex, endIndex);
-
   const containerCharacters = document.createElement("div");
+
   containerCharacters.setAttribute(
     "class",
     "row row-cols-1 row-cols-sm-4 row-cols-md-5 mx-1 g-3"
@@ -160,14 +156,17 @@ function showCharacters(characters: Character[], totalPages: number, page: numbe
     const pSpecies = document.createElement("p");
     pSpecies.textContent = `Species: ${character.species}`;
     characterDiv.appendChild(pSpecies);
+
     const pGender = document.createElement("p");
     pGender.textContent = `Gender: ${character.gender}`;
     characterDiv.appendChild(pGender);
+
     const pOrigin = document.createElement("p");
     pOrigin.textContent = `Origin: ${character.origin}`;
     characterDiv.appendChild(pOrigin);
-    
 
   });
+
   pagination(totalPages, page, characters);
-}
+
+};

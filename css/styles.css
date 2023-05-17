@@ -4,7 +4,6 @@
   src: url(../fonts/ShadowsIntoLight-Regular.ttf);
 }
 
-
 /*BODY*/
 .container-main {
   background-size: cover;
@@ -34,7 +33,7 @@ hr {
 
 .menuList {
 
-  background-color: rgba(10, 172, 10, 1); 
+  background-color: rgba(10, 172, 10, 0.8);
 }
 
 /*FOOTER*/
@@ -73,17 +72,27 @@ hr {
 
 .page-link {
   color: green;
-   margin-top: 30px; 
+  margin-top: 30px;
 }
 
 .page-link:hover {
   background-color: rgba(10, 172, 10, 0.8);
   color: white;
 }
-/* .activePageButton {
-  background-color: green;
-} */
 
-.divLocation {
-  background-color: green;
+/*LOCATIONS*/
+
+.list-group-item {
+  background-color: rgba(10, 172, 10, 0.5);
+
+}
+
+.link-item {
+  color: white;
+  text-decoration: none;
+
+}
+
+.link-item:hover {
+  cursor: pointer;
 }

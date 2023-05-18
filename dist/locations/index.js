@@ -34,7 +34,6 @@ const fetchLocation = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 export function showLocations() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("prueba");
         const location = yield fetchLocation();
         const containerCards = document.getElementById("containerCards");
         if (!containerCards)
@@ -86,8 +85,8 @@ function showLocation(location) {
         });
     });
     Promise.all(residentPromise)
-        .then((arrayCharacter) => {
-        arrayCharacter.forEach((character) => {
+        .then((arrayResidents) => {
+        arrayResidents.forEach((character) => {
             const divCharacter = document.createElement("div");
             divCharacter.setAttribute("class", "col");
             divResident.appendChild(divCharacter);

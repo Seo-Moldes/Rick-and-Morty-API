@@ -30,9 +30,9 @@ const fetchLocation = async (): Promise<Location[]> => {
   }
   return allLocations;
 };
-
+//SHOW LOCATIONS
 export async function showLocations() {
-  console.log("prueba");
+
   const location = await fetchLocation();
   const containerCards = document.getElementById("containerCards") as HTMLElement;
   if (!containerCards) return;
@@ -81,7 +81,7 @@ function showLocation(location: Location) {
   const divResident = document.createElement("div");
   divResident.setAttribute("class", "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5");
   cardLocation.appendChild(divResident);
-  const residentPromise = location.residents.map((urlCharacter) => {
+  const residentPromise = location.residents.map((urlCharacter) => { 
 
     return fetch(urlCharacter)
       .then((response) => response.json())
@@ -92,8 +92,8 @@ function showLocation(location: Location) {
   })
 
   Promise.all(residentPromise)
-    .then((arrayCharacter) => {
-      arrayCharacter.forEach((character) => {
+    .then((arrayResidents) => {
+      arrayResidents.forEach((character) => {
         const divCharacter = document.createElement("div");
         divCharacter.setAttribute("class", "col");
         divResident.appendChild(divCharacter);

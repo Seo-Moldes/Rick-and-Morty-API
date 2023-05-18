@@ -1,6 +1,6 @@
 const urlEpisodes = "https://rickandmortyapi.com/api/episode";
 
-import { Episode, seasons, Season } from "../interfaces.js";
+import { Episode, seasons } from "../interfaces.js";
 
 const listSeasons: string[] = [];
 const seasonsUl = document.getElementById("episodesList");
@@ -8,15 +8,14 @@ export const populateSeasons = async () => {
   try {
     const episodes = await fetchEpisodes();
     let episodeCounter = 0;
-
+    //SHOW SEASONS
     seasons.forEach((season) => {
       let episodeRange: Episode[] = [];
       if (season.id === 1) {
-        // First season with 11 episodes
         episodeRange = episodes.slice(0, 11);
-        episodeCounter = 11; // Actualizamos el contador de episodios
+        episodeCounter = 11;
       } else {
-        // Other seasons with 10 episodes
+        // 10 MORE EPISODES
         episodeRange = episodes.slice(episodeCounter, episodeCounter + 10);
         episodeCounter += 10;
       }
@@ -65,7 +64,7 @@ export const populateSeasons = async () => {
 
         episodeLink.addEventListener("click", () => {
           const containerMain = document.getElementById("containerCards");
-          containerMain?.replaceChildren(); // Eliminar todos los hijos de containerMain
+          containerMain?.replaceChildren(); 
           const episodeDiv = document.createElement("div");
           episodeDiv.setAttribute("class", "row mb-4 text center");
           const titleDiv = document.createElement("div");

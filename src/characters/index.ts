@@ -1,8 +1,9 @@
 const urlCharacter = "https://rickandmortyapi.com/api/character";
 const urlEpisodes = "https://rickandmortyapi.com/api/episode";
-import { Character, ResultCharacter, CharacterLocation, } from "../interfaces.js";
+import { Character, ResultCharacter } from "../interfaces.js";
 
 export const getCharacters = async () => {
+
   try {
     const characterButton = document.getElementById("characterButton") as HTMLAnchorElement;
     const characters = await fetchCharacter();
@@ -35,10 +36,12 @@ const fetchCharacter = async (): Promise<Character[]> => {
         species: characterData.species,
         image: characterData.image,
         location: characterData.location.name,
+        origin: characterData.origin.name
 
       };
 
     });
+
     allCharacters = allCharacters.concat(characters as ResultCharacter[]);
     nextPageUrl = data.info.next;
   }
@@ -67,8 +70,11 @@ const pagination = (totalPages: number, page: number, characters: Character[]) =
   prevPage.appendChild(linkPrevPage);
   paginationLi.appendChild(prevPage);
 
-  const initPage = Math.max(1, page - 2); // Número de página inicial en el rango
-  const finalPage = Math.min(totalPages, page + 2); // Número de página final en el rango
+  //PAGE NUMBER IN RANGE
+
+  const initPage = Math.max(1, page - 2);
+
+  const finalPage = Math.min(totalPages, page + 2);
 
   for (let i = initPage; i <= finalPage; i++) {
     const itPage = document.createElement("li");
@@ -80,9 +86,11 @@ const pagination = (totalPages: number, page: number, characters: Character[]) =
     itPage.appendChild(pageLink);
     paginationLi.appendChild(itPage);
 
-    // Agregar evento click a los botones de página
+    // ADD CLICK EVENT TO PAGE BUTTONS
+
     pageLink.addEventListener("click", () => {
-      showCharacters(characters, totalPages, i); // Pasar el número de página como argumento
+
+      showCharacters(characters, totalPages, i);
     });
 
   }
@@ -96,17 +104,19 @@ const pagination = (totalPages: number, page: number, characters: Character[]) =
   pageNext.appendChild(pageNextLink);
   paginationLi.appendChild(pageNext);
 
-  // Agregar evento click al botón "Next"
+  // ADD CLICK EVENT TO THE NEXT BUTTON
+
   pageNextLink.addEventListener("click", () => {
     if (page < totalPages) {
-      showCharacters(characters, totalPages, page + 1); // Mostrar la siguiente página
+      showCharacters(characters, totalPages, page + 1);
     }
   });
 
-  // Agregar evento click al botón "Previous"
+  // ADD CLICK EVENT BUTTON
+
   linkPrevPage.addEventListener("click", () => {
     if (page > 1) {
-      showCharacters(characters, totalPages, page - 1); // Mostrar la página anterior
+      showCharacters(characters, totalPages, page - 1);
     }
   });
 
@@ -126,7 +136,7 @@ function showCharacters(characters: Character[], totalPages: number, page: numbe
   const charactersPerPage = 20;
   const startIndex = (page - 1) * charactersPerPage;
   const endIndex = startIndex + charactersPerPage;
-  const displayCharacters = characters.slice(startIndex, endIndex);
+  const charactersShow = characters.slice(startIndex, endIndex);
   const containerCharacters = document.createElement("div");
 
   containerCharacters.setAttribute(
@@ -135,7 +145,8 @@ function showCharacters(characters: Character[], totalPages: number, page: numbe
   );
   containerCards.appendChild(containerCharacters);
 
-  displayCharacters.forEach((character) => {
+  //SHOW CHARACTERS
+  charactersShow.forEach((character) => {
     const characterDiv = document.createElement("div");
     characterDiv.setAttribute("class", "col card mx-1 change-color-cards");
     characterDiv.setAttribute("id", `character${character.id}`);

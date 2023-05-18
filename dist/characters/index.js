@@ -36,6 +36,7 @@ const fetchCharacter = () => __awaiter(void 0, void 0, void 0, function* () {
                 species: characterData.species,
                 image: characterData.image,
                 location: characterData.location.name,
+                origin: characterData.origin.name
             };
         });
         allCharacters = allCharacters.concat(characters);
@@ -109,11 +110,11 @@ function showCharacters(characters, totalPages, page) {
     const charactersPerPage = 20;
     const startIndex = (page - 1) * charactersPerPage;
     const endIndex = startIndex + charactersPerPage;
-    const displayCharacters = characters.slice(startIndex, endIndex);
+    const charactersShow = characters.slice(startIndex, endIndex);
     const containerCharacters = document.createElement("div");
     containerCharacters.setAttribute("class", "row row-cols-1 row-cols-sm-4 row-cols-md-5 mx-1 g-3");
     containerCards.appendChild(containerCharacters);
-    displayCharacters.forEach((character) => {
+    charactersShow.forEach((character) => {
         const characterDiv = document.createElement("div");
         characterDiv.setAttribute("class", "col card mx-1 change-color-cards");
         characterDiv.setAttribute("id", `character${character.id}`);
